@@ -1,0 +1,7 @@
+<h1><%= current_user.name+"\'s "%>Projects</h1>
+<hr/>
+<%= link_to "Create New Project", new_project_path, :class=>"btn btn-primary"%>
+<hr/>
+<%@projects.each do |p| %>
+  <h3><%= p.name%></h3>
+<%end%>
