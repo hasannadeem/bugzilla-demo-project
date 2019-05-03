@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
   
+  
   root to: "home#index"
 
   devise_for :users
   
+  get 'home/manager' ,:as => "manager"
+  get 'home/developer' , :as => "developer"
+  get 'home/qa' , :as => "qa"
+  
   resources :projects 
+  resources :bugs
 
 end
 
