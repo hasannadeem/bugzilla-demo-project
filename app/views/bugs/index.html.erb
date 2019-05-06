@@ -1,2 +1,4 @@
-<h1>Bugs#index</h1>
-<p>Find me in app/views/bugs/index.html.erb</p>
+<h1>Bugs</h1>
+<%@bugs.each do |p| %>
+  <h3><%= p.title%></h3>
+<%end%>

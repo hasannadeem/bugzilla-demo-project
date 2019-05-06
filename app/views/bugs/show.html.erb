@@ -1,6 +1,6 @@
-<h1><%= @project.name%></h1>
+<h1><%= @bug.title%></h1>
 
-<%= link_to "edit", edit_project_path, :class =>"text-primary" %> 
+<%= link_to "edit", edit_bug_path, :class =>"text-primary" %> 
 
-<%= link_to "delete", @project, :class =>"text-danger",
+<%= link_to "delete", @bug, :class =>"text-danger",
     data: { confirm: 'Are you sure?' }, method: :delete %> 

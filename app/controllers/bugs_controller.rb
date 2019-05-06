@@ -15,7 +15,7 @@ class BugsController < ApplicationController
   
   def create
     @bug = current_user.bugs.new(bug_params)
-    if @bug.save
+    if @bug.save!
       redirect_to @bug
     else
       render 'new'
@@ -29,7 +29,7 @@ class BugsController < ApplicationController
     if @bug.update(bug_params)
       redirect_to @bug
     else
-      render 'update'
+      render 'edit'
     end
   end
 
@@ -49,7 +49,7 @@ class BugsController < ApplicationController
   end
 
   def bug_params
-    params.require(:bug).permit(:title,:deadline,:type,:status,:screen_shot)
+    params.require(:bug).permit(:title,:deadline,:bug_type,:status,:screen_shot,:description)
   end
 
 end
