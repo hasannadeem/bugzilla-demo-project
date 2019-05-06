@@ -1,0 +1,20 @@
+  <%= form_for @bug do |f|%>
+    <%=f.label :title , :class => 'col-md-12'%>
+      <%=f.text_field :title , :class => 'col-md-12' %>
+    <hr/>
+    <%=f.label :description , :class => 'col-md-12' %>
+      <%=f.text_area :description , :class => 'col-md-12' %>
+    <hr/>
+    <%= f.submit  :class => 'btn btn-primary'%>
+  <%end%>
+
+
+
+<!-- :title 
+:deadline
+:type
+:status
+:screen_shot
+:creator_id
+:assign_to
+:project_id -->
