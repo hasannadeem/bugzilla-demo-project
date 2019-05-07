@@ -2,7 +2,7 @@ class BugsController < ApplicationController
   before_action :find_bug, only: [:show, :edit, :update, :destroy] 
   
   def index
-  	if(current_user.user_type == 'Developer')
+  	if(current_user.user_type == 'developer')
   	  @bugs = Bug.where(assign_to:current_user.id)
   	else
   	  @bugs = Bug.all
@@ -11,9 +11,11 @@ class BugsController < ApplicationController
   
   def new
   	@bug = Bug.new
+    @bug.project_id = params[:project_id]
   end
   
   def create
+
     @bug = current_user.bugs.new(bug_params)
     if @bug.save!
       redirect_to @bug
@@ -49,7 +51,7 @@ class BugsController < ApplicationController
   end
 
   def bug_params
-    params.require(:bug).permit(:title,:deadline,:bug_type,:status,:screen_shot,:description)
+    params.require(:bug).permit(:title,:deadline,:bug_type,:status,:screen_shot,:description,:project_id)
   end
 
 end

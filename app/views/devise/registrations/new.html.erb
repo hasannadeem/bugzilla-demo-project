@@ -8,7 +8,7 @@
     <%= f.label :name %><br />
     <%= f.text_field :name,  autocomplete: "name" %>
   </div>
-<% class_types = ["Manager","Developer","qa"] %>
+<% class_types = ["manager","developer","qa"] %>
  <div class="field">
     <%= f.label :user_type %><br />
     <%= f.select(:user_type, class_types) %>

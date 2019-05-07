@@ -1,3 +1,20 @@
-// Place all the styles related to the home controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bg-buggy
+{
+  background-image: url(bugs.gif);
+}
+
+.black-right-border{
+	border-right: black 1px solid;
+}
+.bug{
+	padding-top: 10vh;
+}
+
+.bg-light-white{
+	background-color: #fffffff2;
+}
+.center{
+	text-align: center;
+}
+

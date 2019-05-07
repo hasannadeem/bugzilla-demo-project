@@ -19,6 +19,6 @@ class HomeController < ApplicationController
 	end
 
 	def qa
-		
+		redirect_to projects_url
 	end
 end

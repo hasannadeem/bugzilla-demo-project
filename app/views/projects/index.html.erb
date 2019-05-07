@@ -1,7 +1,28 @@
-<h1><%= current_user.name+"\'s "%>Projects</h1>
-<hr/>
-<%= link_to "Create New Project", new_project_path, :class=>"btn btn-primary"%>
-<hr/>
-<%@projects.each do |p| %>
-  <h3><%= p.name%></h3>
+<%is_manager = (current_user.user_type=="manager")%>
+<%if is_manager%>
+  <div class="row">
+    <h1 class="col-md-9"><%= current_user.name+"\'s "%>Projects</h1>
+      <%= link_to "Create New Project", new_project_path, :class=>"col-md-3 btn btn-primary"%>
+  </div>
+  <hr/>
 <%end%>
+<div class="row">
+  <%@projects.each do |p| %>
+  	<div class="col-md-4">
+  	  <div class="col-md-12 card">
+        <%if is_manager%>
+  	      <%= link_to p,:class=>"btn" do%>
+            <h3 class="card-header bg-info text-white"><%= p.name %></h3>
+            <p class="card-body"><%= p.description %></p>
+          <%end%>
+        <%else%>
+          <%= link_to new_bug_path(:project_id=>p.id),:class=>"btn" do%>
+            <h3 class="card-header bg-info text-white"><%= p.name %></h3>
+            <p class="card-body"><%= p.description %></p>
+          <%end%>
+        <%end%>
+        </div>
+      <hr>
+    </div>
+  <%end%>
+</div>

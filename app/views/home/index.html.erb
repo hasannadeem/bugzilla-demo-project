@@ -1,3 +1,22 @@
-<%= link_to "sign up", new_user_registration_path %>
-<%= link_to "sign in", new_user_session_path %>
-<%= link_to "sign out", destroy_user_session_path , method: :delete %>
+<div class="row">
+  <div class="offset-md-1 col-md-3  black-right-border ">
+		<%= image_tag "bug.gif" , :class=>"bug"%>
+	</div>
+	<div class="col-md-8">	
+		<div class="col-md-10 offset-md-1 center bg-light-white">
+			<br>
+				<h1>Welcome to Bugzilla</h1>
+			<br>
+			<hr/>
+			<br>
+				<%= link_to "sign in", new_user_session_path, :class => "btn btn-outline-primary" %>
+			<hr/>
+			<br>
+				<%= link_to "sign up", new_user_registration_path, :class => "btn btn-outline-primary" %>
+			<hr/>
+			<br>
+			<br>
+		</div>
+	</div>
+</div>
+

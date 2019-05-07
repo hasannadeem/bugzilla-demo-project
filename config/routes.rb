@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-  
   root to: "home#index"
 
   devise_for :users
@@ -11,6 +10,7 @@ Rails.application.routes.draw do
   
   resources :projects 
   resources :bugs
+  resources :project_users, only: [:create, :destroy]
 
 end
 

@@ -4,7 +4,11 @@ class ProjectsController < ApplicationController
   before_action :varify_creator, only: [:show, :edit, :update, :destroy]
   
   def index
-  	@projects = Project.where(created_by:current_user.id)
+    if(current_user.user_type == 'manager')
+  	  @projects = Project.where(created_by:current_user.id)
+    elsif(current_user.user_type == 'qa')
+      @projects = Project.all
+    end
   end
   
   def new
