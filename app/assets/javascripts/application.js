@@ -15,6 +15,6 @@
 //= require turbolinks
 //= require_tree .
 //= require jquery3
-//= require jquery.ui.datepicker
+//= require jquery-ui/widgets/datepicker
 //= require popper
 //= require bootstrap
