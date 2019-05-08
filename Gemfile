@@ -44,6 +44,8 @@ gem 'devise'
 
 gem 'jquery-ui-rails'
 
+gem 'carrierwave', '~> 1.0'
+
 
 
 group :development, :test do

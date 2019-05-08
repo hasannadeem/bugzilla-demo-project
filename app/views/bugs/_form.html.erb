@@ -7,21 +7,24 @@
       <%= f.text_field :deadline %>
 		  <%# f.date_select :deadline, {:start_year => Time.now.year ,:end_year => 2025, :prompt => true, :deadline => [:day, :month, :year]} %>
     <hr/>
+      <div class="col-md-12">
+      <%= label :bug_type, 'type' ,:class => 'col-md-1'%>
   		<%= f.radio_button :bug_type, 'bug', :checked => true %> 
   		<%= label :bug_type, 'Bug' %>
   		<%= f.radio_button :bug_type, 'feature' %> 
   		<%= label :bug_type, 'feature' %>
+      </div>
   	<hr/>
-	   <% bug_status = ['new', 'started', 'resolved'] %>
-     <% feature_status = ['new', 'started', 'completed'] %>
-	   <div class="field">
-	    <%= f.label :status, :class => 'col-md-6'  %><br />
-	    <%= f.select(:status, bug_status, :class => 'col-md-6' ) %>
-	  </div>
-
+      <div class="col-md-12">
+	      <% bug_status = ['new', 'started', 'resolved'] %>
+	        <div class="form-control">
+	          <%= f.label :status, :class => 'col-md-2'  %>
+	          <%= f.select(:status, bug_status,{}, {:class => "col-md-4"}) %>
+	        </div>
+      </div>
 	<hr/>
         <%=f.label :screen_shot , :class => 'col-md-12' %>
-          <%=f.text_field :screen_shot , :class => 'col-md-12' %>
+        <%=f.file_field :screen_shot , :class => 'col-md-12' %>
     <hr/>
        <%=f.label :description , :class => 'col-md-12' %>
          <%=f.text_area :description , :class => 'col-md-12' %>

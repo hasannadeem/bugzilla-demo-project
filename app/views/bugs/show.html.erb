@@ -1,5 +1,6 @@
 <h1><%= @bug.title%></h1>
 <h3><%= @bug.deadline.to_date.strftime("%A, %B, %e, %Y")%></h3>
+<img src="<%=@bug.screen_shot%>"> 
 
 <%= link_to "edit", edit_bug_path, :class =>"text-primary" %> 
 
