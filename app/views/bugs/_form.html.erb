@@ -32,7 +32,9 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    $('#bug_deadline').datepicker()
+    $('#bug_deadline').datepicker({
+      dateFormat: 'yy-mm-dd'
+    });
   });
 
   $("input[name='bug[bug_type]']").change(function() {
