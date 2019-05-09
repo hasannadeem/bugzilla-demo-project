@@ -4,7 +4,7 @@ class ProjectPolicy < ApplicationPolicy
     @user
   end
   def create?
-    @record.created_by == @user.id
+    @user.manager?
   end
 
   def update?
