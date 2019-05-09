@@ -1,5 +1,6 @@
 class ProjectUsersController < ApplicationController
 layout false
+before_action :authenticate_user!
 before_action :find_project_user, only: [:destroy]
 
   def create
