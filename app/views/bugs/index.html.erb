@@ -1,4 +1,78 @@
-<h1>Bugs</h1>
-<%@bugs.each do |p| %>
-  <h3><%= p.title%></h3>
-<%end%>
+<!-- <h1>Bugs</h1> -->
+<!-- <@bugs.each do |p| %> -->
+  <!-- <h3><= p.title%></h3> -->
+<!-- <end%> -->
+<%@features = @bugs.where(bug_type:'feature')%>
+<%@bugs = @bugs.where(bug_type:'bug')%>
+<div class="container">
+  <div id="collapse_wrapper">
+    <div class="card">
+      <a class="card-link text-white" data-toggle="collapse" href="#collapse_feature">
+        <div class="card-header bg-primary">
+          <h4>Features...</h4>
+        </div>
+      </a>
+      <div id="collapse_feature" class="collapse" data-parent="#collapse_wrapper">
+        <div class="card-body">
+          <table class="table">
+  					<thead>
+    					<tr>
+      					<th scope="col">Title</th>
+      					<th scope="col">Deadline</th>
+      					<th scope="col">Created By</th>
+      					<th scope="col">Assign To</th>
+      					<th scope="col">Show</th>
+    					</tr>
+  					</thead>
+  					<tbody>
+    					<%@features.each do |feature|%>
+    						<tr>
+      						<td><%= feature.title %></td>
+      						<td><%= feature.deadline.to_date.strftime("%a, %B, %e, %Y") if feature.deadline %></td>
+      						<td><%= feature.creator.name %></td>
+      						<td><%= feature.assign_to %></td>
+      						<td><%= link_to 'show', feature,:class=>"btn btn-outline-primary" %></td>
+    						</tr>
+    					<%end%>
+    				</tbody>
+    			</table> 
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header bg-primary">
+        <a class="collapsed card-link text-white" data-toggle="collapse" href="#collapse_bug">
+        <h4>Bugs...</h4>
+      </a>
+      </div>
+      <div id="collapse_bug" class="collapse show" data-parent="#collapse_wrapper">
+        <div class="card-body">
+          <table class="table">
+  					<thead>
+    					<tr>
+      					<th scope="col">Title</th>
+      					<th scope="col">Deadline</th>
+      					<th scope="col">Status</th>
+      					<th scope="col">Created By</th>
+      					<th scope="col">Assign To</th>
+      					<th scope="col">show</th>
+    					</tr>
+  					</thead>
+  					<tbody>
+    					<%@bugs.each do |bug|%>
+    						<tr>
+      						<td><%= bug.title %></td>
+      						<td><%= bug.deadline.to_date.strftime("%a, %B, %e, %Y") if bug.deadline %></td>
+      						<td><%= bug.status %></td>
+      						<td><%= bug.creator.name %></td>
+      						<td><%= bug.assign_to %></td>
+      						<td><%= link_to 'show', bug,:class=>"btn btn-outline-primary" %></td>
+    					  </tr>
+    					<%end%>
+    				</tbody>
+    			</table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
