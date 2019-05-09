@@ -8,4 +8,15 @@ has_many :projects, through: :project_users
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+  def manager?
+    user_type == 'manager'
+  end
+  def qa?
+    user_type == 'qa'
+  end
+  def developer?
+    user_type == 'developer'
+  end
+  
 end
