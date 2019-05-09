@@ -1,4 +1,5 @@
-<%is_manager =  (current_user.user_type=="manager")%>
+<%is_manager =  current_user.manager?%>
+<%is_qa = current_user.qa?%>
 <%if is_manager%>
   <div class="row">
     <h1 class="col-md-9"><%= current_user.name+"\'s "%>Projects</h1>
@@ -10,7 +11,7 @@
   <%@projects.each do |p| %>
   	<div class="col-md-4">
   	  <div class="card">
-  	      <%= link_to (is_manager)? p : new_bug_path(:project_id=>p.id),:class=>"btn" do%>
+  	      <%= link_to (is_manager)? p : (is_qa)? new_bug_path(:project_id=>p.id) : bugs_path(:project_id=>p.id),:class=>"btn" do%>
             <h3 class="card-header bg-info text-white"><%= p.name %></h3>
             <p class="card-body text-justify"><%= p.description %></p>
             <div class="card-footer text-left">
