@@ -9,7 +9,13 @@ Rails.application.routes.draw do
   get 'home/qa' , :as => "qa"
   
   resources :projects 
-  resources :bugs
+  resources :bugs do
+  	member do
+    	get 'assign'
+      get 'start_working'
+      get 'work_done'
+  	end
+  end
   resources :project_users, only: [:create, :destroy]
 
 end
