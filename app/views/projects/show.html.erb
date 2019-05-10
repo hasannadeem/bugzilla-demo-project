@@ -48,9 +48,9 @@
 
 
 <hr/>
-<%= link_to "edit", edit_project_path, :class =>"text-primary" %> 
+<%= link_to "edit", edit_project_path, :class =>"btn btn-outline-primary" %> 
 
-<%= link_to "delete", @project, :class =>"text-danger",
+<%= link_to "delete", @project, :class =>"btn btn-outline-danger",
     data: { confirm: 'Are you sure?' }, method: :delete %> 
 
 <%= render 'project_users/add_devs_modal'%>

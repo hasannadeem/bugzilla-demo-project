@@ -3,7 +3,9 @@
 <%if is_manager%>
   <div class="row">
     <h1 class="col-md-9"><%= current_user.name+"\'s "%>Projects</h1>
-      <%= link_to "Create New Project", new_project_path, :class=>"col-md-3 btn btn-primary"%>
+    <div class="col-md-3 col-form-label">
+      <%= link_to "Create New Project", new_project_path, :class=>"btn btn-outline-primary"%>
+    </div>
   </div>
   <hr/>
 <%end%>

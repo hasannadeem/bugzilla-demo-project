@@ -8,8 +8,14 @@
   <div id="collapse_wrapper">
     <div class="card">
       <a class="card-link text-white" data-toggle="collapse" href="#collapse_feature">
-        <div class="card-header bg-primary">
-          <h4>Features...</h4>
+        <div class="card-header bg-warning">
+          <div class="row">
+          <h3 class="col-md-3">Features</h3>
+          <div class="col-md-2 col-form-label ">Total : <span class="badge badge-light"><%=@features.count%></span></div>
+          <div class="col-md-2 col-form-label ">New : <span class="badge badge-light"><%=@features.where(status:'new').count%></span></div>
+          <div class="col-md-2 col-form-label ">Started : <span class="badge badge-light"><%=@features.where(status:'started').count%></span></div>
+          <div class="col-md-2 col-form-label ">Completed : <span class="badge badge-light"><%=@features.where(status:'completed').count%></span></div>
+        </div>
         </div>
       </a>
       <div id="collapse_feature" class="collapse" data-parent="#collapse_wrapper">
@@ -40,11 +46,18 @@
       </div>
     </div>
     <div class="card">
-      <div class="card-header bg-primary">
-        <a class="collapsed card-link text-white" data-toggle="collapse" href="#collapse_bug">
-        <h4>Bugs...</h4>
+      <a class="collapsed card-link text-white" data-toggle="collapse" href="#collapse_bug">
+        <div class="card-header bg-danger">
+          <div class="row">
+            <h3 class="col-md-3">Bugs</h3>
+            <div class="col-md-2 col-form-label ">Total : <span class="badge badge-light"><%=@bugs.count%></span></div>
+            <div class="col-md-2 col-form-label ">New : <span class="badge badge-light"><%=@bugs.where(status:'new').count%></span></div>
+            <div class="col-md-2 col-form-label ">Started : <span class="badge badge-light"><%=@bugs.where(status:'started').count%></span></div>
+            <div class="col-md-2 col-form-label ">Resolved : <span class="badge badge-light"><%=@bugs.where(status:'resolved').count%></span></div>
+          </div>
+        </div>
       </a>
-      </div>
+      
       <div id="collapse_bug" class="collapse show" data-parent="#collapse_wrapper">
         <div class="card-body">
           <table class="table">

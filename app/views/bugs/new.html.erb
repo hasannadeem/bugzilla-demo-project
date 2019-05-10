@@ -1,6 +1,9 @@
 <div class="container">
+	<p class="alert"></p>
 	<div class="container">
-		<h1>Create a new bug</h1>
+		<h2>Create a new Bug | Feature</h2>
+		<hr/>
+		<%= render "devise/shared/error_messages", resource: @bug %>
 		<%= render 'form'%>
 	</div>
 </div>
