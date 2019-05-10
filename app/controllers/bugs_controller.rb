@@ -1,12 +1,14 @@
 class BugsController < ApplicationController
-  before_action :find_bug, only: [:show, :edit, :update, :destroy] 
+  before_action :authenticate_user!
+  before_action :find_bug, only: [:show, :edit, :assign, :start_working, :work_done, :update, :destroy] 
   
   def index
-  	if(current_user.user_type == 'developer')
-  	  @bugs = Bug.where(assign_to:current_user.id)
-  	else
-  	  @bugs = Bug.all
-  	end
+  	# if(current_user.user_type == 'developer')
+  	#   @bugs = Bug.where(assign_to:current_user.id)
+  	# else
+  	  @bugs = Bug.where(project_id:params[:project_id])
+      authorize @bugs
+  	# end
   end
   
   def new
@@ -17,8 +19,8 @@ class BugsController < ApplicationController
   def create
 
     @bug = current_user.bugs.new(bug_params)
-    if @bug.save!
-      redirect_to @bug
+    if @bug.save
+      redirect_to projects_path
     else
       render 'new'
     end
@@ -38,13 +40,39 @@ class BugsController < ApplicationController
   def show
   end
 
+  def assign 
+    if @bug.update_attribute(:assign_to,current_user.id)
+      redirect_to @bug , notice: "Assigned Successfully"
+    else
+      redirect_to @bug , notice: "Not Assigned"
+    end
+  end
+
+  def start_working 
+    authorize @bug
+    if @bug.update_attribute(:status,'started')
+      redirect_to @bug , notice: "Started Successfully"
+    else
+      redirect_to @bug , notice: "Not Started"
+    end
+  end
+
+  def work_done 
+    authorize @bug
+    status = (@bug.bug_type == 'feature')? 'completed' : 'resolved' 
+    if @bug.update_attribute(:status,status)
+      redirect_to @bug , notice: "Started Successfully"
+    else
+      redirect_to @bug , notice: "Not Started"
+    end
+  end
+
   def destroy
     @bug.destroy
     redirect_to bugs_path
   end  
 
   private 
-
  
   def find_bug
     @bug = Bug.find(params[:id])
