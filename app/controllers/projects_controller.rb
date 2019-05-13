@@ -1,7 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_project, only: [:show, :edit, :update, :destroy] 
-  # before_action :varify_creator, only: [:show, :edit, :update, :destroy]
   before_action :project_authorize, only: [:show, :edit, :update, :destroy]
   
   def index
@@ -32,7 +31,7 @@ class ProjectsController < ApplicationController
     if @project.update(project_params)
       redirect_to @project
     else
-      render 'update'
+      render 'edit'
     end
   end
 
@@ -51,11 +50,6 @@ class ProjectsController < ApplicationController
 
   private 
 
-  # def varify_creator
-  #   if !(@project.created_by == current_user.id)
-  #       redirect_to projects_path, notice: "Record not found" 
-  #   end 
-  # end
   def find_project
     @project = Project.find(params[:id])
   end
