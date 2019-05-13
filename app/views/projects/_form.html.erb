@@ -1,3 +1,4 @@
+<%= render "devise/shared/error_messages", resource: @project %>
   <%= form_for @project do |f|%>
     <%=f.label :name , :class => 'col-md-12'%>
       <%=f.text_field :name , :class => 'col-md-12' %>

@@ -38,10 +38,13 @@
 </div>
 
 <div class="">
-<%= link_to "Edit", edit_bug_path, :class =>"btn btn-outline-warning text-primary" %> 
-
-<%= link_to "Delete", @bug, :class =>"btn btn-outline-danger text-primary",
-    data: { confirm: 'Are you sure?' }, method: :delete %> 
+<% if policy(:bug).edit? %>
+  <%= link_to "Edit", edit_bug_path, :class =>"btn btn-outline-warning text-primary" %> 
+<%end%>
+<% if policy(:bug).destroy? %>
+  <%= link_to "Delete", @bug, :class =>"btn btn-outline-danger text-primary",
+    data: { confirm: 'Are you sure?' }, method: :delete %>
+<%end%> 
 </div>
 
  <!-- The Modal -->
