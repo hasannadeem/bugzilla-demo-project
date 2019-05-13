@@ -7,9 +7,13 @@ class BugPolicy < ApplicationPolicy
   def create?
   	@user.qa?
   end
+  
+  def show?
+    (@user.developer?) && ((@user.projects.ids).include? @record.project_id)
+  end
 
   def assign?
-  	@user.user_type=='developer'
+  	(@user.developer?) && ((@user.projects.ids).include? @record.project_id)
   end 
 
   def start_working?
