@@ -1,24 +1,22 @@
 class BugsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_bug, only: [:show, :edit, :assign, :start_working, :work_done, :update, :destroy] 
+  before_action :bug_authorize, only: [:show, :edit, :update, :destroy, :assign, :start_working, :work_done]
   
   def index
-  	# if(current_user.user_type == 'developer')
-  	#   @bugs = Bug.where(assign_to:current_user.id)
-  	# else
   	  @bugs = Bug.where(project_id:params[:project_id])
       authorize @bugs
-  	# end
   end
   
   def new
   	@bug = Bug.new
     @bug.project_id = params[:project_id]
+    authorize @bug
   end
   
   def create
-
     @bug = current_user.bugs.new(bug_params)
+    authorize @bug
     if @bug.save
       redirect_to projects_path
     else
@@ -41,7 +39,7 @@ class BugsController < ApplicationController
   end
 
   def assign 
-    if @bug.update_attribute(:assign_to,current_user.id)
+    if @bug.update_attribute(:assign_to,current_user.id)  
       redirect_to @bug , notice: "Assigned Successfully"
     else
       redirect_to @bug , notice: "Not Assigned"
@@ -49,7 +47,6 @@ class BugsController < ApplicationController
   end
 
   def start_working 
-    authorize @bug
     if @bug.update_attribute(:status,'started')
       redirect_to @bug , notice: "Started Successfully"
     else
@@ -58,7 +55,6 @@ class BugsController < ApplicationController
   end
 
   def work_done 
-    authorize @bug
     status = (@bug.bug_type == 'feature')? 'completed' : 'resolved' 
     if @bug.update_attribute(:status,status)
       redirect_to @bug , notice: "Started Successfully"
@@ -80,6 +76,10 @@ class BugsController < ApplicationController
 
   def bug_params
     params.require(:bug).permit(:title,:deadline,:bug_type,:status,:screen_shot,:description,:project_id)
+  end
+  
+  def bug_authorize
+    authorize @bug
   end
 
 end
