@@ -1,58 +1,66 @@
 <%unless notice %>
 	<p class="alert"></p>
 <%end%>
+<!-- Show bug tilte and button to change status -->
 <div class="row">
 	<h1 class="col-md-9"><%= @bug.title%></h1>
 	<div class="col-md-3">
 		<%= link_to "assign", assign_bug_path(@bug),method: :patch, :class=>"btn btn-outline-primary" unless @bug.assign_to %>
 		<%if @bug.assign_to%>
-		<%= link_to "Start Working",  start_working_bug_path(@bug),method: :patch, :class=>"btn btn-outline-primary" if @bug.status == 'new' %>
-		<%= link_to (@bug.bug_type=='bug')? 'resolved' : 'completed', work_done_bug_path(@bug),method: :patch, :class=>"btn btn-outline-primary" if @bug.status == 'started' %>
+			<%= link_to "Start Working", start_working_bug_path(@bug),method: :patch, :class=>"btn btn-outline-primary" if @bug.status == 'new' %>
+			<%= link_to (@bug.bug_type=='bug')? 'resolved' : 'completed', work_done_bug_path(@bug),method: :patch, :class=>"btn btn-outline-primary" if @bug.status == 'started' %>
 		<%end%>
 	</div>
 </div>
+<!-- Show Description -->
 <div class="row"> 
 	<p class="col-md-12"><%=@bug.description%></p>
 </div>
+
 <hr>
+<!-- Show Details  -->
 <div class="row">
 	<div class="col-md-6 black-right-border">	
 		<div class="row">
 			<h3 class="col-md-3">Deadline:</h3>
-				<h3 class="col-md-9 text-danger"><%= @bug.deadline.to_date.strftime("%A, %B, %e, %Y") if @bug.deadline%></h3>
+			<h3 class="col-md-9 text-danger"><%= @bug.deadline.to_date.strftime("%A, %B, %e, %Y") if @bug.deadline%></h3>
 			<p class="col-md-3">Created at:</p>
-				<p class="col-md-9"><%= @bug.created_at.to_date.strftime("%A, %B, %e, %Y")%></p>
+			<p class="col-md-9"><%= @bug.created_at.to_date.strftime("%A, %B, %e, %Y")%></p>
 			<p class="col-md-3">Status:</p>
-				<p class="col-md-9"><%=@bug.status%></p>
+			<p class="col-md-9"><%=@bug.status%></p>
 			<p class="col-md-3">Created by:</p>
-				<p class="col-md-9"><%=@bug.creator.name%></p>
+			<p class="col-md-9"><%=@bug.creator.name%></p>
 			<p class="col-md-3">Assign to:</p>
-				<p class="col-md-9"><%=User.find(@bug.assign_to).name if @bug.assign_to%></p>
+			<p class="col-md-9"><%=User.find(@bug.assign_to).name if @bug.assign_to%></p>
 			<p class="col-md-3">Project:</p>
-				<p class="col-md-9"><%=@bug.project.name%></p>
+			<p class="col-md-9"><%=@bug.project.name%></p>
 		</div>
 	</div>
+
+<!-- show screen shot -->
 	<div class="col-md-6">
 		<img class="height-50" src="<%=@bug.screen_shot%>" data-toggle="modal" data-target="#screen_shot_modal"/> 
 	</div>
+
 </div>
 
+<!-- Links to edit and delete -->
 <div class="">
-<% if policy(:bug).edit? %>
-  <%= link_to "Edit", edit_bug_path, :class =>"btn btn-outline-warning text-primary" %> 
-<%end%>
-<% if policy(:bug).destroy? %>
-  <%= link_to "Delete", @bug, :class =>"btn btn-outline-danger text-primary",
+	<% if policy(:bug).edit? %>
+  	<%= link_to "Edit", edit_bug_path, :class =>"btn btn-outline-warning text-primary" %>
+  <%end%>
+	<% if policy(:bug).destroy? %>
+  	<%= link_to "Delete", @bug, :class =>"btn btn-outline-danger text-primary",
     data: { confirm: 'Are you sure?' }, method: :delete %>
-<%end%> 
+	<%end%> 
 </div>
 
- <!-- The Modal -->
-  <div class="modal fade" id="screen_shot_modal">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-          <img src="<%=@bug.screen_shot%>"/>
-        </div>
+<!-- Modal for screen shot-->
+<div class="modal fade" id="screen_shot_modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <img src="<%=@bug.screen_shot%>"/>
       </div>
     </div>
   </div>
+</div>
