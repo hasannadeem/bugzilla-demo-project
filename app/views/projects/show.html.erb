@@ -1,23 +1,26 @@
 <h1><%= @project.name%></h1>
 <p><%= @project.description%></p>
 <hr/>
+
 <div class="container">
   <div class="row">
   	<% project_devs = @project.users.where(user_type:'developer') %>
 	<div class="col-md-6">
 	  <div class="col-md-12 card">
 	    <div class="row card-header bg-info text-white">
-	      <h3 class="col-md-11">Developers  <span class="badge  badge-light"><%=project_devs.count%></span></h3>
+	      <h3 class="col-md-11">Developers 
+	      	<span class="badge  badge-light"><%=project_devs.count%></span>
+	      </h3>
 	      <button class="col-md-1 btn btn-primary bg-light text-primary" data-toggle="modal" data-target="#add_dev_modal">+</button>
 	    </div>
 
 		  <div class="card-body">
 		  	<ul class="list-group">
 		  	  <% project_devs.each do |dev|%>
-  				<li class="list-group-item d-flex justify-content-between align-items-center">
-    			  <p><%= dev.name %></p>
-    			  <%= link_to "delete", project_user_path(:user_id=>dev.id,:project_id=>@project.id), :class =>"btn btn-light text-danger", data: { confirm: 'Are you sure?' }, method: :delete%>
-  				</li>
+  					<li class="list-group-item d-flex justify-content-between align-items-center">
+    			  	<p><%= dev.name %></p>
+    			  	<%= link_to "delete", project_user_path(:user_id=>dev.id,:project_id=>@project.id), :class =>"btn btn-light text-danger", data: { confirm: 'Are you sure?' }, method: :delete%>
+  					</li>
   			  <% end %>
   			</ul>
 		  </div>
@@ -57,21 +60,15 @@
 <%= render 'project_users/add_qas_modal'%>       
 
 <script type="text/javascript">
-
-	$(function(){
-  		// always pass csrf tokens on ajax calls
-  		$.ajaxSetup({
-    		headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-  		});
-	});
-
 	function add_user(user_id,project_id)
 	{
 		data={ 
 			   'project_id':project_id,
 			   'user_id':user_id
 			 }
-		
+		$.ajaxSetup({
+    		headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+  	});
 		$.ajax({
   			type: "POST",
   			url: "<%= project_users_path%>",
