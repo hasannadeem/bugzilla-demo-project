@@ -4,16 +4,12 @@ Rails.application.routes.draw do
 
   devise_for :users
   
-  get 'home/manager' ,:as => "manager"
-  get 'home/developer' , :as => "developer"
-  get 'home/qa' , :as => "qa"
-  
   resources :projects 
   resources :bugs do
   	member do
-    	get 'assign'
-      get 'start_working'
-      get 'work_done'
+    	patch 'assign'
+      patch 'start_working'
+      patch 'work_done'
   	end
   end
   resources :project_users, only: [:create, :destroy]
