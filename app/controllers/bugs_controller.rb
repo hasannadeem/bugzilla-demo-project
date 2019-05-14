@@ -5,7 +5,7 @@ class BugsController < ApplicationController
   
   def index
     authorize Bug.new(project_id:params[:project_id])
-	  @bugs = Bug.where(project_id:params[:project_id]) 
+    @view_data = helpers.data_for_view Bug.where(project_id:params[:project_id])
   end
   
   def new 
