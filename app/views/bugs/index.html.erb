@@ -1,5 +1,3 @@
-<%@features = @bugs.where(bug_type:'feature')%>
-<%@bugs = @bugs.where(bug_type:'bug')%>
 <div class="container">
   <div id="collapse_wrapper">
     <div class="card">
@@ -7,10 +5,10 @@
         <div class="card-header bg-warning">
           <div class="row">
           <h3 class="col-md-3">Features</h3>
-          <div class="col-md-2 col-form-label ">Total : <span class="badge badge-light"><%=@features.count%></span></div>
-          <div class="col-md-2 col-form-label ">New : <span class="badge badge-light"><%=@features.where(status:'new').count%></span></div>
-          <div class="col-md-2 col-form-label ">Started : <span class="badge badge-light"><%=@features.where(status:'started').count%></span></div>
-          <div class="col-md-2 col-form-label ">Completed : <span class="badge badge-light"><%=@features.where(status:'completed').count%></span></div>
+          <div class="col-md-2 col-form-label ">Total : <span class="badge badge-light"><%=@view_data[:total_features]%></span></div>
+          <div class="col-md-2 col-form-label ">New : <span class="badge badge-light"><%=@view_data[:new_features]%></span></div>
+          <div class="col-md-2 col-form-label ">Started : <span class="badge badge-light"><%=@view_data[:started_features]%></span></div>
+          <div class="col-md-2 col-form-label ">Completed : <span class="badge badge-light"><%=@view_data[:completed_features]%></span></div>
         </div>
         </div>
       </a>
@@ -28,7 +26,7 @@
     					</tr>
   					</thead>
   					<tbody>
-    					<%@features.each do |feature|%>
+    					<%@view_data[:features].each do |feature|%>
     						<tr>
       						<td><%= feature.title %></td>
       						<td><%= feature.deadline.to_date.strftime("%a, %B, %e, %Y") if feature.deadline %></td>
@@ -48,10 +46,10 @@
         <div class="card-header bg-danger">
           <div class="row">
             <h3 class="col-md-3">Bugs</h3>
-            <div class="col-md-2 col-form-label ">Total : <span class="badge badge-light"><%=@bugs.count%></span></div>
-            <div class="col-md-2 col-form-label ">New : <span class="badge badge-light"><%=@bugs.where(status:'new').count%></span></div>
-            <div class="col-md-2 col-form-label ">Started : <span class="badge badge-light"><%=@bugs.where(status:'started').count%></span></div>
-            <div class="col-md-2 col-form-label ">Resolved : <span class="badge badge-light"><%=@bugs.where(status:'resolved').count%></span></div>
+            <div class="col-md-2 col-form-label ">Total : <span class="badge badge-light"><%=@view_data[:total_bugs]%></span></div>
+            <div class="col-md-2 col-form-label ">New : <span class="badge badge-light"><%=@view_data[:new_bugs]%></span></div>
+            <div class="col-md-2 col-form-label ">Started : <span class="badge badge-light"><%=@view_data[:started_bugs]%></span></div>
+            <div class="col-md-2 col-form-label ">Resolved : <span class="badge badge-light"><%=@view_data[:resolved_bugs]%></span></div>
           </div>
         </div>
       </a>
@@ -70,7 +68,7 @@
     					</tr>
   					</thead>
   					<tbody>
-    					<%@bugs.each do |bug|%>
+    					<%@view_data[:bugs].each do |bug|%>
     						<tr>
       						<td><%= bug.title %></td>
       						<td><%= bug.deadline.to_date.strftime("%a, %B, %e, %Y") if bug.deadline %></td>
