@@ -32,6 +32,10 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    @project_devs = @project.users.where(user_type:'developer')
+    @un_assigned_devs = User.where(user_type:'developer') - @project_devs
+    @project_qas = @project.users.where(user_type:'qa')
+    @un_assigned_qas = User.where(user_type:'qa') - @project_qas
   end
 
   def destroy

@@ -4,19 +4,19 @@
 
 <div class="container">
   <div class="row">
-  	<% project_devs = @project.users.where(user_type:'developer') %>
+  	<%  %>
 	<div class="col-md-6">
 	  <div class="col-md-12 card">
 	    <div class="row card-header bg-info text-white">
 	      <h3 class="col-md-11">Developers 
-	      	<span class="badge  badge-light"><%=project_devs.count%></span>
+	      	<span class="badge  badge-light"><%=@project_devs.count%></span>
 	      </h3>
 	      <button class="col-md-1 btn btn-primary bg-light text-primary" data-toggle="modal" data-target="#add_dev_modal">+</button>
 	    </div>
 
 		  <div class="card-body">
 		  	<ul class="list-group">
-		  	  <% project_devs.each do |dev|%>
+		  	  <% @project_devs.each do |dev|%>
   					<li class="list-group-item d-flex justify-content-between align-items-center">
     			  	<p><%= dev.name %></p>
     			  	<%= link_to "delete", project_user_path(:user_id=>dev.id,:project_id=>@project.id), :class =>"btn btn-light text-danger", data: { confirm: 'Are you sure?' }, method: :delete%>
@@ -26,16 +26,15 @@
 		  </div>
 	  </div>
 	</div>
-	<% project_qas = @project.users.where(user_type:'qa') %>
 	<div class="col-md-6">
 	  <div class="col-md-12 card">
         <div class="row card-header bg-info text-white">
-	      <h3 class="col-md-11">QA  <span class="badge  badge-light"><%=project_qas.count%></span></h3>
+	      <h3 class="col-md-11">QA  <span class="badge  badge-light"><%=@project_qas.count%></span></h3>
 	      <button id="add_qa" class="col-md-1 btn btn-primary bg-light text-primary" data-toggle="modal" data-target="#add_qa_modal">+</button>
 	    </div>	    
 		  <div class="card-body">
 		      <ul class="list-group">
-		  	  <% project_qas.each do |qa|%>
+		  	  <% @project_qas.each do |qa|%>
   				<li class="list-group-item d-flex justify-content-between align-items-center">
     			  <p><%= qa.name %></p>
     			  <%= link_to "delete", project_user_path(:user_id=>qa.id,:project_id=>@project.id), :class =>"btn btn-light text-danger", data: { confirm: 'Are you sure?' }, method: :delete%>

@@ -11,15 +11,12 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-		      <% qas = User.where(user_type:'qa') %>
 			      <ul class="list-group">
-  			      <% qas.each do |qa| %>
-    			      <% if(!qa.projects.include?(@project))%>
+  			      <% @un_assigned_qas.each do |qa| %>
     			        <li class="list-group-item d-flex justify-content-between align-items-center" id="<%=qa.id%>"> 
                     <%=qa.name%> 
     				        <button class="btn btn-primary" onclick="add_user(<%=qa.id%>,<%=@project.id%>)">Add</button>
     			        </li>
-    			      <%end%>
   			      <%end%>
 			      </ul>
 		    </div>
