@@ -1,22 +1,20 @@
 class BugsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :find_bug, only: [:show, :edit, :assign, :start_working, :work_done, :update, :destroy] 
-  before_action :bug_authorize, only: [:show, :edit, :update, :destroy, :assign, :start_working, :work_done]
+  before_action :find_bug, except:[:index,:new,:create] 
+  
+  before_action :authorize_bug, except:[:index]
   
   def index
-  	  @bugs = Bug.where(project_id:params[:project_id])
-      authorize @bugs
+    authorize Bug.new(project_id:params[:project_id])
+	  @bugs = Bug.where(project_id:params[:project_id]) 
   end
   
-  def new
+  def new 
   	@bug = Bug.new
     @bug.project_id = params[:project_id]
-    authorize @bug
   end
   
   def create
     @bug = current_user.bugs.new(bug_params)
-    authorize @bug
     if @bug.save
       redirect_to projects_path
     else
@@ -71,15 +69,18 @@ class BugsController < ApplicationController
   private 
  
   def find_bug
-    @bug = Bug.find(params[:id])
+    @bug ||= Bug.find(params[:id])
   end
 
   def bug_params
     params.require(:bug).permit(:title,:deadline,:bug_type,:status,:screen_shot,:description,:project_id)
   end
   
-  def bug_authorize
-    authorize @bug
+  def authorize_bug
+    if @bug.present?
+      authorize @bug
+    else
+      authorize Bug
+    end
   end
-
 end

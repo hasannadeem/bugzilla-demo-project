@@ -1,10 +1,12 @@
 class Bug < ApplicationRecord
-	belongs_to :creator, :class_name => "User"
+	belongs_to :creator, class_name: "User"
 	belongs_to :project
 
 	validates :title, :bug_type, :status, presence: true
 	validates_uniqueness_of :title, scope: :project_id
+	
 	validate :screen_shot_type
+
 	mount_uploader :screen_shot, ImageUploader
 
 	private

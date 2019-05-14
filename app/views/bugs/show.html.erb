@@ -4,10 +4,10 @@
 <div class="row">
 	<h1 class="col-md-9"><%= @bug.title%></h1>
 	<div class="col-md-3">
-		<%= link_to "assign", assign_bug_path(@bug), :class=>"btn btn-outline-primary" unless @bug.assign_to %>
+		<%= link_to "assign", assign_bug_path(@bug),method: :patch, :class=>"btn btn-outline-primary" unless @bug.assign_to %>
 		<%if @bug.assign_to%>
-		<%= link_to "Start Working",  start_working_bug_path(@bug), :class=>"btn btn-outline-primary" if @bug.status == 'new' %>
-		<%= link_to (@bug.bug_type=='bug')? 'resolved' : 'completed', work_done_bug_path(@bug), :class=>"btn btn-outline-primary" if @bug.status == 'started' %>
+		<%= link_to "Start Working",  start_working_bug_path(@bug),method: :patch, :class=>"btn btn-outline-primary" if @bug.status == 'new' %>
+		<%= link_to (@bug.bug_type=='bug')? 'resolved' : 'completed', work_done_bug_path(@bug),method: :patch, :class=>"btn btn-outline-primary" if @bug.status == 'started' %>
 		<%end%>
 	</div>
 </div>

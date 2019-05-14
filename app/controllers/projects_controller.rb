@@ -1,21 +1,17 @@
 class ProjectsController < ApplicationController
-  before_action :authenticate_user!
   before_action :find_project, only: [:show, :edit, :update, :destroy] 
-  before_action :project_authorize, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_project
   
   def index
     @projects = policy_scope(Project)
-    authorize @projects
   end
   
   def new
   	@project = Project.new
-    authorize @project
   end
   
   def create
     @project = current_user.projects.new(project_params)
-    authorize @project
     @project.created_by = current_user.id
     if @project.save
       redirect_to @project
@@ -58,8 +54,12 @@ class ProjectsController < ApplicationController
     params.require(:project).permit(:name,:description)
   end
 
-  def project_authorize
-    authorize @project
+  def authorize_project
+    if @project.present?
+      authorize @project 
+    else 
+      authorize Project
+    end
   end
 
 end

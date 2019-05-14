@@ -1,7 +1,7 @@
 class BugPolicy < ApplicationPolicy
 
   def index?
-    @user.developer?
+   show?
   end
   
   def create?
@@ -13,7 +13,7 @@ class BugPolicy < ApplicationPolicy
   end
 
   def assign?
-  	(@user.developer?) && ((@user.projects.ids).include? @record.project_id)
+  	show?
   end 
 
   def start_working?
@@ -21,7 +21,7 @@ class BugPolicy < ApplicationPolicy
   end 
 
   def work_done?
-  	@user.id == @record.assign_to
+  	start_working?
   end 
 
   class Scope < Scope
@@ -29,6 +29,8 @@ class BugPolicy < ApplicationPolicy
       scope.all
     end
   end
+
+
 
 
 end

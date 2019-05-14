@@ -1,7 +1,7 @@
 class ProjectPolicy < ApplicationPolicy
   
   def index?
-    @user
+    true
   end
   def create?
     @user.manager?
@@ -24,7 +24,7 @@ class ProjectPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       if @user.manager?
-      	scope.where(created_by:@user.id)
+      	scope.where(created_by: @user.id)
       elsif @user.qa? 
       	scope.all
       elsif @user.developer?
