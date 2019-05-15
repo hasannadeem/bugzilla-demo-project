@@ -1,10 +1,10 @@
 <%= render "devise/shared/error_messages", resource: @project %>
-  <%= form_for @project do |f|%>
-    <%=f.label :name , :class => 'col-md-12'%>
-      <%=f.text_field :name , :class => 'col-md-12' ,:required => 'true' %>
-    <hr/>
-    <%=f.label :description , :class => 'col-md-12' %>
-      <%=f.text_area :description , :class => 'col-md-12' %>
-    <hr/>
-    <%= f.submit  :class => 'btn btn-primary'%>
-  <%end%>
+<%= form_for @project do |f|%>
+  <%=f.label :name , :class => 'col-md-12'%>
+  <%=f.text_field :name , :class => 'col-md-12' ,:required => 'true' %>
+  <hr/>
+  <%=f.label :description , :class => 'col-md-12' %>
+  <%=f.text_area :description , :class => 'col-md-12' %>
+  <hr/>
+  <%= f.submit  :class => 'btn btn-primary'%>
+<%end%>
