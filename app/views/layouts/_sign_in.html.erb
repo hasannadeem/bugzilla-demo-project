@@ -1,14 +1,15 @@
 <ul class="nav navbar-nav navbar-right">
-  <% if current_user %>      
+  <%if current_user%>      
     <li class="nav-item">
       <%= link_to "sign out", destroy_user_session_path, method: :delete %>
     </li>
-<% else %>
-    <li class="nav-item">
-      <%= link_to "sign in", new_user_session_path, id: "sign_in_btn" %> 
-    </li><pre> | </pre>
-        <li class="nav-item"> 
-      <%= link_to "sign up", new_user_registration_path, :id => "sign_up_btn" %>
-    </li>  
-    <% end %>
+  <%else%>
+      <li class="nav-item">
+        <%= link_to "sign in", new_user_session_path, id: "sign_in_btn" %> 
+      </li>
+      <pre> | </pre>
+      <li class="nav-item"> 
+        <%= link_to "sign up", new_user_registration_path, :id => "sign_up_btn" %>
+      </li>  
+  <%end%>
 </ul>
