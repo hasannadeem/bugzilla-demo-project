@@ -4,12 +4,12 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-group row">
     <%= f.label :email,:class=>"col-form-label col-md-12" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" ,:class=>"form-control offset-md-1 col-md-6"%>
+    <%= f.email_field :email, :required=> true, autofocus: true, autocomplete: "email" ,:class=>"form-control offset-md-1 col-md-6"%>
   </div>
 
   <div class="form-group row">
     <%= f.label :password,:class=>"col-form-label col-md-12"  %><br />
-    <%= f.password_field :password, autocomplete: "current-password",:class=>"form-control offset-md-1 col-md-6" %>
+    <%= f.password_field :password, :required=> true, autocomplete: "current-password",:class=>"form-control offset-md-1 col-md-6" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
