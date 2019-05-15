@@ -1,7 +1,7 @@
 module BugsHelper
 	def data_for_view(all_bugs)
-		bugs 		 = all_bugs.where(bug_type:'bug')
-		features = all_bugs.where(bug_type:'feature')
+		bugs 		  = all_bugs.where(bug_type:'bug')
+		features  = all_bugs.where(bug_type:'feature')
 		
 		view_data = {
 		:features 					=> features,
