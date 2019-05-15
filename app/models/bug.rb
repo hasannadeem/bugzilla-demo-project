@@ -9,6 +9,11 @@ class Bug < ApplicationRecord
 
 	mount_uploader :screen_shot, ImageUploader
 
+
+	def assign_to_name
+		User.find(assign_to).name
+	end
+
 	private
 
 	def screen_shot_type
