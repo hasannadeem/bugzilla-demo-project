@@ -31,7 +31,7 @@
 			<p class="col-md-3">Created by:</p>
 			<p class="col-md-9"><%=@bug.creator.name%></p>
 			<p class="col-md-3">Assign to:</p>
-			<p class="col-md-9"><%=User.find(@bug.assign_to).name if @bug.assign_to%></p>
+			<p class="col-md-9"><%=@bug.assign_to_name if @bug.assign_to%></p>
 			<p class="col-md-3">Project:</p>
 			<p class="col-md-9"><%=@bug.project.name%></p>
 		</div>
