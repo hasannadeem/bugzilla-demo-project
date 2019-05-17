@@ -7,19 +7,25 @@ class ProjectPolicy < ApplicationPolicy
     @user.manager?
   end
 
-  def update?
-    @record.created_by == @user.id
-  end
-
   def show?
     @record.created_by == @user.id
   end
 
-  def destroy?
-    @record.created_by == @user.id
+  def update?
+    show?
   end
 
+  def destroy?
+    show?
+  end
 
+  def add_user?
+    show?
+  end
+
+  def remove_user?
+    show?
+  end
 
   class Scope < Scope
     def resolve
