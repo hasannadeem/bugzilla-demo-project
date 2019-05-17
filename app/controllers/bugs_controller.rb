@@ -1,7 +1,7 @@
 class BugsController < ApplicationController
-  before_action :find_bug, except:[:index,:new,:create] 
+  before_action :find_bug, except: [:index,:new,:create] 
   
-  before_action :authorize_bug, except:[:index]
+  before_action :authorize_bug, except: [:index]
   
   def index
     authorize Bug.new(project_id:params[:project_id])
