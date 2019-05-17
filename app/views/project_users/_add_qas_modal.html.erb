@@ -15,7 +15,7 @@
   			      <% @pp.un_assigned_qas.each do |qa| %>
     			        <li class="list-group-item d-flex justify-content-between align-items-center" id="<%=qa.id%>"> 
                     <%=qa.name%> 
-    				        <button class="btn btn-primary" onclick="add_user(<%=qa.id%>,<%=@project.id%>)">Add</button>
+    				        <%=@pp.link_to_add_user_to_project(qa.id)%>
     			        </li>
   			      <%end%>
 			      </ul>

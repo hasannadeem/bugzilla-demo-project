@@ -56,26 +56,3 @@
 
 <%= render 'project_users/add_devs_modal'%>
 <%= render 'project_users/add_qas_modal'%>
-
-
-<script type="text/javascript">
-	function add_user(user_id,project_id)
-	{
-		data={ 
-			   'project_id':project_id,
-			   'user_id':user_id
-			 }
-		$.ajaxSetup({
-    		headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
-  	});
-		$.ajax({
-  			type: "POST",
-  			url: "<%= project_users_path%>",
-  			data: data,
-  			success: function(result){
-  				location.reload();
-  			}	
-		});
-	}
-
-</script>

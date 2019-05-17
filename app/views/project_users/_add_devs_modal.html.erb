@@ -15,7 +15,7 @@
 		    <ul class="list-group">
 			    <% @pp.un_assigned_devs.each do |dev| %>
   			      <li class="list-group-item d-flex justify-content-between align-items-center" id="<%=dev.id%>"> <%=dev.name%>
-  				      <button class="btn btn-primary" onclick="add_user(<%=dev.id%>,<%=@project.id%>)">Add</button>
+  				      <%=@pp.link_to_add_user_to_project(dev.id)%>
   			      </li>
 			    <%end%>
 		    </ul>
