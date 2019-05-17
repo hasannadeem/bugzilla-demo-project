@@ -4,7 +4,14 @@ Rails.application.routes.draw do
 
   devise_for :users
   
-  resources :projects 
+  resources :projects do
+    member do
+      patch 'add_user'
+      patch 'remove_user'
+    end
+  end
+
+
   
   resources :bugs do
   	member do
@@ -14,6 +21,6 @@ Rails.application.routes.draw do
   	end
   end
 
-  resources :project_users, only: [:create, :destroy]
+  # resources :project_users, only: [:create, :destroy]
 
 end
