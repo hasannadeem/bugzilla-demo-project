@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
-  before_action :find_project, only: [:show, :edit, :update, :destroy] 
+  before_action :find_project, except: [:index,:new,:create] 
+  before_action :find_user, only: [:add_user, :remove_user]
   before_action :authorize_project
   
   def index
@@ -34,6 +35,22 @@ class ProjectsController < ApplicationController
   def show
     @pp = ProjectPresenter.new(@project,view_context)
   end
+  
+  def add_user
+    if @project.users << @user
+      redirect_to @project 
+    else
+      redirect_to @project, notice: "Can not add user to project"
+    end
+  end
+
+  def remove_user
+    if @project.users.destroy(@user)
+      redirect_to @project 
+    else
+      redirect_to @project, notice: "Can not remove user from project"
+    end
+  end
 
   def destroy
     
@@ -47,12 +64,17 @@ class ProjectsController < ApplicationController
 
   private 
 
+
   def find_project
-    @project = Project.find(params[:id])
+    @project ||= Project.find(params[:id])
   end
 
   def project_params
     params.require(:project).permit(:name,:description)
+  end
+
+  def find_user
+    @user ||= User.find_by(id:params[:user_id])
   end
 
   def authorize_project
